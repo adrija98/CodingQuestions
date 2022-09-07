@@ -12,7 +12,8 @@
 // Input: num = "20050", k = 1
 // Output: "50"
 
-
+// Time complexity: O(n)
+// Space complexity: O(n)
 const smallestAfterRemoving = (num, k) => {
     if(k == num.length) 
         return "0";
@@ -34,7 +35,7 @@ const smallestAfterRemoving = (num, k) => {
         stack.pop();
 
     stack = stack.reverse();
-    
+
     return stack.length > 0 ? stack.join("") : "0";
 }
 
