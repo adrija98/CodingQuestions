@@ -39,4 +39,4 @@ const smallestAfterRemoving = (num, k) => {
     return stack.length > 0 ? stack.join("") : "0";
 }
 
-console.log(smallestAfterRemoving("825563", 2));
+console.log(smallestAfterRemoving("20050", 1));
