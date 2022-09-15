@@ -15,7 +15,7 @@ const phrases = (arr, i = 0, phrase = [], result = []) => {
         result.push(new Array(...phrase));
     }
     else {
-        for(word of arr[i]) {
+        for(let word of arr[i]) {
             phrase.push(word);
             phrases(arr, i+1, phrase, result);
             phrase.pop();
