@@ -51,4 +51,25 @@ const minimumCost2 = (matrix) => {
     return costs[n-1][m-1];
 }
 
-console.log(minimumCost1([[96, 72, 52, 54, 86, 58, 21, 19, 99], [71, 96, 1, 43, 44, 98, 40, 26, 24]]))
+const minimumCost3 = (matrix, i = 0, j = 0, lookup = {}) => {
+    let n = matrix.length;
+    let m = matrix[0].length;
+    let key = i + ":" + j;
+    if (lookup[key])
+        return lookup[key];
+    if (i == n-1 && j == m - 1)
+        return matrix[i][j]
+    else if(i == n - 1) {
+        lookup[key] = matrix[i][j] + minimumCost3(matrix, i, j + 1, lookup);
+        return lookup[key];
+    } else if(j == m - 1) {
+        lookup[key] = matrix[i][j] + minimumCost3(matrix, i + 1, j, lookup);
+        return lookup[key];
+    } else {
+        lookup[key] = matrix[i][j] + Math.min(minimumCost3(matrix, i + 1, j, lookup), minimumCost3(matrix, i, j + 1, lookup));
+        return lookup[key];
+    }
+    
+}
+
+console.log(minimumCost3([[96, 72, 52, 54, 86, 58, 21, 19, 99], [71, 96, 1, 43, 44, 98, 40, 26, 24]]))
