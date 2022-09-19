@@ -50,5 +50,22 @@ const paths2 = (matrix) => {
     return dp[n-1][m-1];
 }
 
+const paths3 = (matrix, i = 0, j = 0, lookup = {}) => {
+    let n = matrix.length;
+    let m = matrix[0].length;
+    let key = i + ":" + j;
+
+    if(lookup[key])
+        return lookup[key];
+    if(i > n - 1 || j > m - 1 || matrix[i][j] === 1)
+        return 0;
+    else if(i === n - 1 && j === m - 1)
+        return 1;
+    else {
+        lookup[key] = paths1(matrix, i, j + 1) + paths1(matrix, i + 1, j);
+        return lookup[key];
+    }
+}
+
 console.log(paths1([[0, 0, 0, 0, 1], [1, 0, 1, 0, 0], [0, 0, 1, 0, 0], [0, 0, 0, 0, 0]]));
 console.log(paths1([[0, 0, 0, 0], [0, 0, 0, 1]]));
