@@ -68,20 +68,20 @@ const lcs2 = (str1, str2, i = 0, j = 0) => {
         return Math.max(lcs2(str1, str2, i+1, j), lcs2(str1, str2, i, j+1));
 }
 
-// Time-optimized recursive solution (memoization):
+// Time-optimized recursive solution (memoization)
 // Time complexity: O(nm)
 // Space complexity: O(nm)
-const lcs3 = (str1, str2, i = 0, j = 0, memoiz = {}) => {
+const lcs3 = (str1, str2, i = 0, j = 0, lookup = {}) => {
     let key = i + " " + j;
-    if(memoiz[key] !== undefined)
-        return memoiz[key];
+    if(lookup[key] !== undefined)
+        return lookup[key];
     else if(i == str1.length || j == str2.length)
         return 0;
     else if(str1[i] == str2[j])
-        return 1 + lcs3(str1, str2, i+1, j+1, memoiz);
+        return 1 + lcs3(str1, str2, i+1, j+1, lookup);
     else {
-        let output = Math.max(lcs3(str1, str2, i+1, j, memoiz), lcs3(str1, str2, i, j+1, memoiz));
-        memoiz[key] = output;
+        let output = Math.max(lcs3(str1, str2, i+1, j, lookup), lcs3(str1, str2, i, j+1, lookup));
+        lookup[key] = output;
         return output;
     }
 }
