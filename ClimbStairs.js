@@ -34,10 +34,28 @@ const waysToClimb1 = (n, possibleSteps) => {
     return numWays;    
 }
 
-// By using dynamic programming:
+// By using dynamic programming: Memoization
 // Time complexity: O(n*m)
 // Space complexity: O(n)
-const waysToClimb2 = (n, possibleSteps) => {
+const waysToClimb2 = (n, possibleSteps, lookup = {}) => {
+    if(lookup[n])
+        return lookup[n];
+    if(n == 0) 
+        return 1;
+    let numWays = 0;
+    for(let steps of possibleSteps) {
+        if((n - steps) >= 0) {
+            numWays += waysToClimb1(n - steps, possibleSteps);
+        }
+        lookup[n] = numWays;
+    }
+    return lookup[n]; 
+}
+
+// By using dynamic programming: Tabulation
+// Time complexity: O(n*m)
+// Space complexity: O(n)
+const waysToClimb3 = (n, possibleSteps) => {
     nbWaysArr = [...Array(n+1)].map(x => 0);
     nbWaysArr[0] = 1;
 

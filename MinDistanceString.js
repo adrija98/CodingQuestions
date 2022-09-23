@@ -24,7 +24,7 @@ const minDistance1 = (word1, word2, i =0, j = 0) => {
         return 1 + Math.min(minDistance1(word1, word2, i+1, j), minDistance1(word1, word2, i, j+1), minDistance1(word1, word2, i+1, j+1));
 }
 
-// By using dynamic programming:
+// By using dynamic programming: Tabulation
 // Time complexity: O(nm)
 // Space complexity: O(nm)
 const minDistance2 = (word1, word2) => {
@@ -47,6 +47,26 @@ const minDistance2 = (word1, word2) => {
     }
 
     return dp[n][m];
+}
+
+// By using dynamic programming: Memoization
+// Time complexity: O(nm)
+// Space complexity: O(nm)
+const minDistance3 = (word1, word2, lookup ={}) => {
+    let key = i + ":" + j;
+    if(lookup[key])
+        return lookup[key];
+    if(i == word1.length)
+        return word2.length-j;
+    else if(j == word2.length)
+        return word1.length-i;
+    else if(word1[i] == word2[j]) {
+        lookup[key] = minDistance1(word1, word2, i+1, j+1);
+        return lookup[key];
+    } else {
+        lookup[key] = 1 + Math.min(minDistance1(word1, word2, i+1, j), minDistance1(word1, word2, i, j+1), minDistance1(word1, word2, i+1, j+1));
+        return lookup[key];
+    }
 }
 
 console.log(minDistance1("inside", "index"));
