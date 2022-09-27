@@ -33,7 +33,7 @@ const minCoins1 = (coins, amount) => {
 
 // By using dynamic programming: Memoization
 // Time complexity = O(nm)
-// Space complexity = O(n)
+// Space complexity = O(nm)
 const minCoins2 = (coins, amount) => {
     const _minCoins2 = (coins, amount, lookup = {}) => {
         if(lookup[amount])
