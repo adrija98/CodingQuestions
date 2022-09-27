@@ -56,15 +56,15 @@ const waysToClimb2 = (n, possibleSteps, lookup = {}) => {
 // Time complexity: O(n*m)
 // Space complexity: O(n)
 const waysToClimb3 = (n, possibleSteps) => {
-    nbWaysArr = [...Array(n+1)].map(x => 0);
+    let nbWaysArr = [...Array(n+1)].map(x => 0);
     nbWaysArr[0] = 1;
 
     for(let i = 1; i < n+1; i++) {
         let numWays = 0;
         for(let steps of possibleSteps)
             if((i-steps) >= 0)
-                numWays += numWaysArr[i-steps];
-        numWaysArr[i] = numWays;
+                numWays += nbWaysArr[i-steps];
+        nbWaysArr[i] = numWays;
     }
-    return numWaysArr[n];
+    return nbWaysArr[n];
 }
